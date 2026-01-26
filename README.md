@@ -79,14 +79,13 @@ Phase 4:  Topology Selection       → MESH / HIERARCHICAL / RING / STAR
 Phase 5:  Agent Selection          → ~15 core + custom agents (SPARC agents if needed)
 Phase 6:  Memory Configuration     → AgentDB / ReasoningBank / Hybrid
 Phase 7:  Intelligence Layer       → SONA / MoE / HNSW / Flash Attention
-Phase 8:  Model Routing            → Haiku / Sonnet / Opus auto-selection
-Phase 9:  Background Workers       → 12 available workers
-Phase 10: Security Configuration   → Audit / AIDefence / scanning
-Phase 11: Testing Configuration    → testgaps / tester / TDD
-Phase 12: Documentation Config     → document worker / api-docs
-Phase 13: Integration Config       → GitHub / Diff / Claims / Sessions
-Phase 14: Command Generation       → Complete config for review
-Phase 15: User Decision            → Execute / Modify / Add / Remove
+Phase 8:  Background Workers       → 12 available workers
+Phase 9: Security Configuration   → Audit / AIDefence / scanning
+Phase 10: Testing Configuration    → testgaps / tester / TDD
+Phase 11: Documentation Config     → document worker / api-docs
+Phase 12: Integration Config       → GitHub / Diff / Claims / Sessions
+Phase 13: Command Generation       → Complete config for review
+Phase 14: User Decision            → Execute / Modify / Add / Remove
 ```
 
 ---
