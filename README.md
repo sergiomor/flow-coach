@@ -2,7 +2,7 @@
 
 > Interactive **claude-flow v3** orchestration coach with automated recommendations for security, testing, documentation, GitHub integration, and more.
 
-**Version**: v3 only. CLI source: `@claude-flow/cli/src/commands/`
+**Version**: v3 only.
 
 ---
 
