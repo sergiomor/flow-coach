@@ -69,7 +69,7 @@ This is the MINIMAL configuration for pure research tasks.
 
 ---
 
-## Complete Coaching Process (15 Phases)
+## Complete Coaching Process (14 Phases)
 
 ```
 Phase 1:  Task Assessment          → Evaluates 10 dimensions (includes SPARC)
