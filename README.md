@@ -66,7 +66,6 @@ Flow Coach analyzes your task description and **automatically enables features**
 
 ---
 This is the MINIMAL configuration for pure research tasks.
-```
 
 ---
 
