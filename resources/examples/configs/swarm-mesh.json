@@ -1,0 +1,50 @@
+{
+  "name": "mesh-swarm-example",
+  "description": "Example mesh topology swarm configuration for high-collaboration tasks",
+  "topology": "mesh",
+  "maxAgents": 5,
+  "consensus": "raft",
+  "agents": [
+    {
+      "type": "system-architect",
+      "role": "Design system architecture",
+      "model": "opus"
+    },
+    {
+      "type": "backend-dev",
+      "role": "Implement API endpoints",
+      "model": "sonnet"
+    },
+    {
+      "type": "tester",
+      "role": "Create test suites",
+      "model": "sonnet"
+    },
+    {
+      "type": "reviewer",
+      "role": "Code review and quality",
+      "model": "sonnet"
+    },
+    {
+      "type": "api-docs",
+      "role": "Generate documentation",
+      "model": "haiku"
+    }
+  ],
+  "memory": {
+    "type": "hybrid",
+    "namespace": "api-development",
+    "persistence": true
+  },
+  "intelligence": {
+    "enableSona": true,
+    "enableMoe": true,
+    "enableHnsw": true
+  },
+  "workers": [
+    "map",
+    "testgaps",
+    "document"
+  ],
+  "cli_command": "npx claude-flow@alpha hive-mind init --topology mesh --max-agents 5 && npx claude-flow@alpha hive-mind task \"Build REST API\""
+}

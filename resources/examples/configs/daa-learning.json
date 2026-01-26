@@ -1,0 +1,75 @@
+{
+  "name": "daa-learning-example",
+  "description": "Example Decentralized Autonomous Agents configuration for self-learning systems",
+  "mode": "daa",
+  "topology": "mesh",
+  "agents": [
+    {
+      "id": "learner-001",
+      "name": "Adaptive Coder",
+      "type": "coder",
+      "cognitivePattern": "adaptive",
+      "learningRate": 0.1,
+      "capabilities": ["implementation", "refactoring", "optimization"],
+      "enableMemory": true
+    },
+    {
+      "id": "learner-002",
+      "name": "Systems Thinker",
+      "type": "system-architect",
+      "cognitivePattern": "systems",
+      "learningRate": 0.08,
+      "capabilities": ["architecture", "design", "integration"],
+      "enableMemory": true
+    },
+    {
+      "id": "learner-003",
+      "name": "Critical Reviewer",
+      "type": "reviewer",
+      "cognitivePattern": "critical",
+      "learningRate": 0.05,
+      "capabilities": ["review", "security", "quality"],
+      "enableMemory": true
+    },
+    {
+      "id": "learner-004",
+      "name": "Divergent Researcher",
+      "type": "researcher",
+      "cognitivePattern": "divergent",
+      "learningRate": 0.15,
+      "capabilities": ["research", "exploration", "innovation"],
+      "enableMemory": true
+    }
+  ],
+  "workflow": {
+    "id": "autonomous-development",
+    "name": "Self-Learning Development Workflow",
+    "strategy": "adaptive",
+    "steps": [
+      {"name": "research", "type": "task"},
+      {"name": "design", "type": "task"},
+      {"name": "implement", "type": "parallel"},
+      {"name": "review", "type": "task"},
+      {"name": "learn", "type": "task"}
+    ]
+  },
+  "knowledgeSharing": {
+    "enabled": true,
+    "domains": ["patterns", "solutions", "failures"],
+    "autoShare": true
+  },
+  "intelligence": {
+    "enableSona": true,
+    "enableMoe": true,
+    "enableHnsw": true,
+    "trajectoryTracking": true,
+    "ewcConsolidation": true
+  },
+  "mcp_commands": {
+    "create_agent": "mcp__claude-flow__daa_agent_create",
+    "adapt_agent": "mcp__claude-flow__daa_agent_adapt",
+    "create_workflow": "mcp__claude-flow__daa_workflow_create",
+    "execute_workflow": "mcp__claude-flow__daa_workflow_execute",
+    "share_knowledge": "mcp__claude-flow__daa_knowledge_share"
+  }
+}

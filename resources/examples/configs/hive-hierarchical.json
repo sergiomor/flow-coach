@@ -1,0 +1,64 @@
+{
+  "name": "hierarchical-hive-example",
+  "description": "Example hierarchical hive-mind configuration for large team coordination",
+  "mode": "hive-mind",
+  "topology": "hierarchical",
+  "maxAgents": 12,
+  "consensus": "raft",
+  "roles": {
+    "queen": {
+      "type": "hierarchical-coordinator",
+      "model": "opus",
+      "responsibilities": ["task delegation", "conflict resolution", "progress tracking"]
+    },
+    "leads": [
+      {
+        "type": "backend-dev",
+        "team": "api",
+        "model": "sonnet"
+      },
+      {
+        "type": "system-architect",
+        "team": "infrastructure",
+        "model": "sonnet"
+      }
+    ],
+    "workers": [
+      {
+        "type": "coder",
+        "count": 4,
+        "model": "sonnet"
+      },
+      {
+        "type": "tester",
+        "count": 2,
+        "model": "sonnet"
+      },
+      {
+        "type": "reviewer",
+        "count": 2,
+        "model": "haiku"
+      }
+    ]
+  },
+  "memory": {
+    "type": "agentdb",
+    "namespace": "enterprise-project",
+    "persistence": true,
+    "hnsw": true
+  },
+  "intelligence": {
+    "enableSona": true,
+    "enableMoe": true,
+    "enableHnsw": true,
+    "modelRouting": true
+  },
+  "workers": [
+    "map",
+    "audit",
+    "testgaps",
+    "document",
+    "benchmark"
+  ],
+  "cli_command": "npx claude-flow@alpha init wizard"
+}

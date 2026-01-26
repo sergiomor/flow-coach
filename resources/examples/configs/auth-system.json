@@ -1,0 +1,55 @@
+{
+  "name": "auth-system-config",
+  "description": "Security-critical OAuth2 authentication system with comprehensive auditing",
+  "mode": "hive-mind",
+  "topology": "mesh",
+  "maxAgents": 5,
+  "consensus": "raft",
+  "security": {
+    "priority": "CRITICAL",
+    "auditTrail": true,
+    "secretsManagement": "vault",
+    "codeReviewRequired": true
+  },
+  "agents": [
+    {
+      "type": "security-manager",
+      "role": "Security architecture and threat modeling",
+      "model": "opus",
+      "capabilities": ["threat-analysis", "security-review", "compliance-check"]
+    },
+    {
+      "type": "coder",
+      "role": "Implement OAuth2 flows and token management",
+      "model": "sonnet",
+      "capabilities": ["authentication", "authorization", "token-handling"]
+    },
+    {
+      "type": "tester",
+      "role": "Security testing and penetration testing",
+      "model": "sonnet",
+      "capabilities": ["security-testing", "penetration-testing", "vulnerability-scanning"]
+    }
+  ],
+  "memory": {
+    "type": "agentdb",
+    "namespace": "auth-security",
+    "persistence": true,
+    "encryption": true
+  },
+  "intelligence": {
+    "enableSona": true,
+    "enableMoe": true,
+    "enableHnsw": true
+  },
+  "workers": [
+    "audit",
+    "testgaps"
+  ],
+  "claims": {
+    "enabled": true,
+    "approvalRequired": ["security-manager"],
+    "gates": ["security-review", "penetration-test"]
+  },
+  "cli_command": "npx claude-flow@alpha hive-mind init --topology mesh --max-agents 5 && npx claude-flow@alpha hive-mind task \"Implement OAuth2 authentication system\""
+}

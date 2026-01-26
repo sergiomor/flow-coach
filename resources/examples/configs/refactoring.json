@@ -1,0 +1,73 @@
+{
+  "name": "refactoring-config",
+  "description": "Technical debt sprint configuration for systematic code improvement",
+  "mode": "hive-mind",
+  "topology": "mesh",
+  "maxAgents": 6,
+  "consensus": "raft",
+  "agents": [
+    {
+      "type": "code-analyzer",
+      "role": "Identify technical debt and code smells",
+      "model": "opus",
+      "capabilities": ["static-analysis", "complexity-detection", "dependency-analysis"]
+    },
+    {
+      "type": "coder",
+      "role": "Implement refactoring changes",
+      "model": "sonnet",
+      "capabilities": ["refactoring", "pattern-application", "code-cleanup"]
+    },
+    {
+      "type": "reviewer",
+      "role": "Review refactoring for correctness and improvements",
+      "model": "sonnet",
+      "capabilities": ["code-review", "design-patterns", "best-practices"]
+    },
+    {
+      "type": "tester",
+      "role": "Ensure refactoring preserves behavior",
+      "model": "sonnet",
+      "capabilities": ["regression-testing", "behavior-verification", "coverage-analysis"]
+    }
+  ],
+  "memory": {
+    "type": "hybrid",
+    "namespace": "refactoring-sprint",
+    "persistence": true
+  },
+  "intelligence": {
+    "enableSona": true,
+    "enableMoe": true,
+    "enableHnsw": true,
+    "patternDetection": true
+  },
+  "workers": [
+    "map",
+    "refactor",
+    "testgaps",
+    "optimize"
+  ],
+  "refactoringTargets": {
+    "codeSmells": [
+      "long-methods",
+      "large-classes",
+      "duplicate-code",
+      "dead-code",
+      "complex-conditionals"
+    ],
+    "patterns": [
+      "extract-method",
+      "extract-class",
+      "replace-conditional-with-polymorphism",
+      "introduce-parameter-object"
+    ],
+    "metrics": {
+      "maxCyclomaticComplexity": 10,
+      "maxMethodLength": 30,
+      "maxClassLength": 300,
+      "minTestCoverage": 80
+    }
+  },
+  "cli_command": "npx claude-flow@alpha hive-mind init --topology mesh --max-agents 6 && npx claude-flow@alpha hive-mind task \"Execute technical debt refactoring sprint\""
+}

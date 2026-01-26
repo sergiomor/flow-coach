@@ -1,0 +1,36 @@
+{
+  "name": "bug-fix-config",
+  "description": "Minimal focused configuration for bug fixes with regression testing",
+  "mode": "swarm",
+  "topology": "star",
+  "maxAgents": 2,
+  "consensus": "simple",
+  "agents": [
+    {
+      "type": "coder",
+      "role": "Diagnose and fix the bug",
+      "model": "sonnet",
+      "capabilities": ["debugging", "fix-implementation", "root-cause-analysis"]
+    },
+    {
+      "type": "tester",
+      "role": "Create regression tests and verify fix",
+      "model": "sonnet",
+      "capabilities": ["regression-testing", "fix-verification", "edge-case-testing"]
+    }
+  ],
+  "memory": {
+    "type": "simple",
+    "namespace": "bug-fix",
+    "persistence": false
+  },
+  "intelligence": {
+    "enableSona": false,
+    "enableMoe": false,
+    "enableHnsw": false
+  },
+  "workers": [
+    "testgaps"
+  ],
+  "cli_command": "npx claude-flow@alpha swarm init --topology star --max-agents 2 && npx claude-flow@alpha swarm task \"Fix bug and add regression test\""
+}

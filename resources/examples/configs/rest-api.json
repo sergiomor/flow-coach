@@ -1,0 +1,49 @@
+{
+  "name": "rest-api-config",
+  "description": "REST API development with full documentation and testing coverage",
+  "mode": "hive-mind",
+  "topology": "mesh",
+  "maxAgents": 6,
+  "consensus": "raft",
+  "agents": [
+    {
+      "type": "system-architect",
+      "role": "API design and endpoint architecture",
+      "model": "opus",
+      "capabilities": ["api-design", "schema-definition", "versioning"]
+    },
+    {
+      "type": "backend-dev",
+      "role": "Implement REST endpoints and middleware",
+      "model": "sonnet",
+      "capabilities": ["endpoint-implementation", "middleware", "validation"]
+    },
+    {
+      "type": "tester",
+      "role": "Create integration and unit tests for API",
+      "model": "sonnet",
+      "capabilities": ["integration-testing", "unit-testing", "contract-testing"]
+    },
+    {
+      "type": "api-docs",
+      "role": "Generate OpenAPI specs and documentation",
+      "model": "haiku",
+      "capabilities": ["openapi", "swagger", "documentation"]
+    }
+  ],
+  "memory": {
+    "type": "hybrid",
+    "namespace": "rest-api-dev",
+    "persistence": true
+  },
+  "intelligence": {
+    "enableSona": true,
+    "enableMoe": true,
+    "enableHnsw": true
+  },
+  "workers": [
+    "document",
+    "testgaps"
+  ],
+  "cli_command": "npx claude-flow@alpha hive-mind init --topology mesh --max-agents 6 && npx claude-flow@alpha hive-mind task \"Build REST API with documentation\""
+}
