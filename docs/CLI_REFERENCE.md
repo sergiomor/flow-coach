@@ -169,28 +169,160 @@ npx claude-flow@alpha hive-mind init -t hierarchical-mesh -c byzantine -m 15
 | `--consensus-threshold` | Consensus threshold | 0.66 |
 | `--auto-spawn` | Auto-spawn initial agents | false |
 
-### hive-mind spawn
+---
+
+## Prerequisite Initialization
+
+**Run BEFORE main commands when features are recommended.**
+
+### hooks init
+
+Initialize hooks system (required for workers, sessions, intelligence).
 
 ```bash
-# Spawn by type
-npx claude-flow@alpha hive-mind spawn coder
-npx claude-flow@alpha hive-mind spawn researcher --batch 3
+# Standard template (recommended)
+npx claude-flow@alpha hooks init --template standard
 
-# Launch Claude Code with hive-mind
-npx claude-flow@alpha hive-mind spawn --claude -o "Build REST API"
+# Minimal hooks only
+npx claude-flow@alpha hooks init --template minimal
+
+# All available hooks
+npx claude-flow@alpha hooks init --template full
+
+# Force reinitialize
+npx claude-flow@alpha hooks init --force
 ```
 
-**Options**:
+---
+
+### hooks intelligence init
+
+Initialize intelligence layer (SONA, MoE, HNSW, Flash Attention, EWC++).
+
+```bash
+# Full intelligence suite
+npx claude-flow@alpha hooks intelligence init \
+  --enable-sona true \
+  --enable-moe true \
+  --enable-hnsw true
+
+# Selective features
+npx claude-flow@alpha hooks intelligence init --enable-sona true
+```
+
+---
+
+### embeddings init
+
+Initialize vector embeddings for semantic search.
+
+```bash
+# With hyperbolic embeddings (better for hierarchical data)
+npx claude-flow@alpha embeddings init --hyperbolic true --cache-size 256
+
+# Standard Euclidean embeddings
+npx claude-flow@alpha embeddings init --model all-MiniLM-L6-v2
+```
+
+---
+
+### agentdb init
+
+Initialize AgentDB with HNSW indexing (150x-12,500x faster search).
+
+```bash
+# With HNSW and quantization
+npx claude-flow@alpha agentdb init \
+  --enable-hnsw true \
+  --quantization-bits 8 \
+  --cache-size 512
+
+# Basic AgentDB
+npx claude-flow@alpha agentdb init
+```
+
+---
+
+### Check Initialization Status
+
+```bash
+# Overall system status
+npx claude-flow@alpha system status
+
+# Deep health check
+npx claude-flow@alpha system health --deep
+
+# Check specific components
+npx claude-flow@alpha hooks list
+npx claude-flow@alpha embeddings status
+npx claude-flow@alpha hooks intelligence --show-status
+```
+
+**For complete initialization sequences and detection logic, see [INITIALIZATION.md](INITIALIZATION.md)**
+
+---
+
+### hive-mind spawn
+
+**Syntax:**
+```bash
+# Spawn predefined agent type
+npx claude-flow@alpha hive-mind spawn [type]
+
+# Spawn with custom name using role type
+npx claude-flow@alpha hive-mind spawn --type [role] --name [custom-name]
+
+# Launch Claude Code session
+npx claude-flow@alpha hive-mind spawn --claude -o "Task description"
+```
+
+**Examples:**
+```bash
+# Predefined agent types
+npx claude-flow@alpha hive-mind spawn coder
+npx claude-flow@alpha hive-mind spawn reviewer
+npx claude-flow@alpha hive-mind spawn researcher --batch 3
+npx claude-flow@alpha hive-mind spawn tester
+npx claude-flow@alpha hive-mind spawn architect
+
+# Custom named agents (use --type + --name)
+npx claude-flow@alpha hive-mind spawn --type specialist --name "security-reviewer"
+npx claude-flow@alpha hive-mind spawn --type worker --name "data-processor"
+npx claude-flow@alpha hive-mind spawn --type scout --name "complexity-analyzer"
+
+# Let Claude Code handle it
+npx claude-flow@alpha hive-mind spawn --claude -o "Build REST API"
+npx claude-flow@alpha hive-mind spawn --claude -o "Review security patterns"
+```
+
+**Valid Predefined Agent Types:**
+- **Core:** `coder`, `reviewer`, `tester`, `researcher`, `planner`, `analyst`
+- **Architecture:** `architect`, `system-architect`, `backend-dev`, `mobile-dev`
+- **SPARC:** `specification`, `pseudocode`, `architecture`, `refinement`, `sparc-coord`
+- **Analysis:** `code-analyzer`, `perf-analyzer`, `optimizer`, `production-validator`
+- **GitHub:** `pr-manager`, `code-review-swarm`, `issue-tracker`, `release-manager`
+- **Coordination:** `coordinator`, `queen-coordinator`, `task-orchestrator`, `memory-coordinator`
+- **Consensus:** `byzantine-coordinator`, `raft-manager`, `gossip-coordinator`, `crdt-synchronizer`
+
+**Valid Role Types (for --type):**
+- `worker` - General purpose agents
+- `specialist` - Specialized expert agents
+- `scout` - Exploration/reconnaissance agents
+
+**Options:**
 | Flag | Description | Default |
 |------|-------------|---------|
-| `[type]` | Agent type: coordinator, researcher, coder, analyst, etc. | worker |
-| `-n, --name <string>` | Custom agent name | auto |
+| `[type]` | Predefined agent type (see list above) | worker |
+| `--type <role>` | Role type: worker, specialist, scout | - |
+| `-n, --name <string>` | Custom agent name (use with --type) | auto |
 | `-s, --swarm-id <id>` | Target swarm ID | current |
 | `-b, --batch <n>` | Spawn multiple agents | 1 |
 | `-i, --interactive` | Interactive spawn mode | false |
 | `--auto-assign` | Auto-assign to tasks | false |
 | `--claude` | Launch Claude Code session | false |
 | `-o, --objective <task>` | Task objective (with --claude) | - |
+
+**See [AGENTS.md](AGENTS.md) for complete list of 60+ agent types.**
 
 ### SPARC Refinement (TDD) via Hive-Mind
 

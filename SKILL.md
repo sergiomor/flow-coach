@@ -12,7 +12,8 @@ When this skill is invoked, you MUST follow this exact sequence:
 1. **FIRST**: Generate the visual TASK ASSESSMENT (see format below)
 2. **SECOND**: Display recommended configuration and CLI commands
 3. **THIRD**: Show the User Decision Menu and WAIT for user input
-4. **NEVER**: Use Task tool, Bash, Explore, or any execution tool until user chooses [E]
+4. **WHEN USER CHOOSES [E]**: Check prerequisites (see INITIALIZATION.md) and include missing init commands
+5. **NEVER**: Use Task tool, Bash, Explore, or any execution tool until user chooses [E]
 
 **DO NOT show this warning section to the user.** Start your response with the TASK ASSESSMENT.
 
@@ -185,6 +186,77 @@ npx claude-flow@alpha analyze ast src/file.ts   # AST analysis
 
 ---
 
+## Valid Agent Types
+
+**Core Development (5):**
+- `coder` - Implementation and coding
+- `reviewer` - Code review and quality
+- `tester` - Test creation and validation
+- `researcher` - Analysis and information gathering
+- `planner` - Task planning and decomposition
+
+**Architecture (4):**
+- `architect` - System architecture design
+- `system-architect` - High-level system design
+- `backend-dev` - API and server development
+- `mobile-dev` - Mobile app development
+
+**SPARC Methodology (6):**
+- `specification` - Requirements specification
+- `pseudocode` - Algorithm design
+- `architecture` - System architecture
+- `refinement` - Code refinement
+- `sparc-coord` - SPARC workflow coordination
+- `sparc-coder` - SPARC implementation
+
+**Analysis & Quality (5):**
+- `analyst` - General analysis
+- `code-analyzer` - Code quality analysis
+- `perf-analyzer` - Performance analysis
+- `optimizer` - Optimization tasks
+- `production-validator` - Production validation
+
+**GitHub Integration (5):**
+- `pr-manager` - Pull request management
+- `code-review-swarm` - Distributed code review
+- `issue-tracker` - Issue management
+- `release-manager` - Release coordination
+- `workflow-automation` - GitHub Actions
+
+**Coordination (5):**
+- `coordinator` - General coordination
+- `queen-coordinator` - Hive-mind leadership
+- `task-orchestrator` - Task distribution
+- `memory-coordinator` - Memory synchronization
+- `smart-agent` - Intelligent task handling
+
+**Consensus & Distributed (4):**
+- `byzantine-coordinator` - Fault-tolerant consensus
+- `raft-manager` - Leader election
+- `gossip-coordinator` - Eventually consistent
+- `crdt-synchronizer` - Conflict-free replication
+
+**Spawning Syntax:**
+```bash
+# Use predefined agent type
+npx claude-flow@alpha hive-mind spawn reviewer
+npx claude-flow@alpha hive-mind spawn coder --batch 3
+
+# Use role type + custom name
+npx claude-flow@alpha hive-mind spawn --type specialist --name "security-reviewer"
+npx claude-flow@alpha hive-mind spawn --type worker --name "data-processor"
+npx claude-flow@alpha hive-mind spawn --type scout --name "complexity-analyzer"
+
+# Let Claude Code handle it
+npx claude-flow@alpha hive-mind spawn --claude -o "Review security patterns"
+```
+
+**Valid role types for `--type`:** `worker`, `specialist`, `scout`
+
+**See [docs/AGENTS.md](docs/AGENTS.md) for complete list of 60+ agent types.**
+
+---
+
 ## Decision Trees
 
 For detailed decision guidance, see [Decision Trees Reference](docs/DECISION_TREES.md).
@@ -215,6 +287,98 @@ For detailed decision guidance, see [Decision Trees Reference](docs/DECISION_TRE
 - Code complexity --> `analyze complexity` command
 - AST / syntax tree / parse code --> `analyze ast` command
 - Dependencies / imports / module graph --> `analyze deps` command
+
+---
+
+## Prerequisite Initialization
+
+**When user chooses [E] EXECUTE**: Follow this MANDATORY sequence:
+
+### **STEP 1: Check System Status FIRST**
+```bash
+npx claude-flow@alpha system status
+```
+**Parse output to detect:**
+- Intelligence: active/inactive
+- Embeddings: initialized/not initialized
+- AgentDB: initialized/not initialized
+- Hooks: enabled/disabled
+- Active sessions
+
+### **STEP 2: Initialize Only Missing Components**
+
+**Intelligence Layer (if ≥50% score AND not active):**
+```bash
+# Default (no provider arguments)
+npx claude-flow@alpha hooks intelligence init
+
+# If already initialized: Skip with message
+echo "✓ Intelligence layer already active, skipping init"
+```
+
+**Memory System (if ≥60% score AND not initialized):**
+```bash
+# ALWAYS use default ONNX provider (no --provider flag)
+npx claude-flow@alpha embeddings init
+npx claude-flow@alpha agentdb init
+
+# If already initialized: Skip with message
+echo "✓ Embeddings already initialized, skipping"
+echo "✓ AgentDB already initialized, skipping"
+```
+
+**Hooks System (if workers needed AND not enabled):**
+```bash
+npx claude-flow@alpha hooks init --template standard
+
+# If already initialized: Skip with message
+echo "✓ Hooks system already initialized, skipping"
+```
+
+**Session Management (if HIVE-MIND mode):**
+```bash
+# Always safe to run (restores existing or creates new)
+npx claude-flow@alpha hooks session-start --project "<project-name>"
+```
+
+### **STEP 3: User Communication**
+
+**Show clear status messages:**
+```
+Checking system status...
+✓ Intelligence layer: Active (balanced mode)
+✓ Embeddings: Initialized (ONNX, 384D)
+✓ AgentDB: Initialized (HNSW enabled)
+✓ Hooks: Enabled (standard template)
+✓ Session: Restored (session-1769446979339)
+
+All prerequisites ready. Proceeding with agent spawning...
+```
+
+### **CRITICAL RULES:**
+
+1. **NEVER use --provider flag** for embeddings init (defaults to ONNX)
+2. **ALWAYS check system status BEFORE** running any init commands
+3. **SKIP init commands** if component already initialized (show ✓ message)
+4. **NO --force flags** unless user explicitly requests reinit
+5. **Parse "already initialized" warnings** as success, not errors
+
+**Configuration**: Users can override thresholds in `.claude/settings.json`:
+```json
+{
+  "skills": {
+    "flow-coach": {
+      "thresholds": {
+        "intelligence": 50,
+        "memory": 60,
+        "workers": 40
+      }
+    }
+  }
+}
+```
+
+**See [docs/INITIALIZATION.md](docs/INITIALIZATION.md) for complete initialization sequences, detection logic, and configuration examples.**
 
 ---
 

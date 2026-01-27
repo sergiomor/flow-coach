@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Default Flow Coach configuration - balanced settings for most projects",
+  "skills": {
+    "flow-coach": {
+      "thresholds": {
+        "intelligence": 50,
+        "memory": 60,
+        "workers": 40
+      },
+      "templates": {
+        "hooks": "standard",
+        "intelligence": "standard"
+      },
+      "autoInit": true,
+      "preferences": {
+        "verbosity": "concise",
+        "autoTriggers": true,
+        "showDecisionTrees": false
+      }
+    }
+  }
+}

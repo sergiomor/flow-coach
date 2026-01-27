@@ -264,6 +264,43 @@ npx claude-flow@alpha hooks worker-dispatch --trigger document --context "src/"
 
 ---
 
+## Configuration
+
+Flow Coach can be customized per-project by creating `.claude/settings.json`:
+
+```json
+{
+  "skills": {
+    "flow-coach": {
+      "thresholds": {
+        "intelligence": 50,
+        "memory": 60,
+        "workers": 40
+      },
+      "templates": {
+        "hooks": "standard",
+        "intelligence": "standard"
+      },
+      "autoInit": true
+    }
+  }
+}
+```
+
+**Configuration Options:**
+- **Thresholds** - When to auto-enable features (0-100%)
+  - `intelligence` - Intelligence layer init threshold (default: 50)
+  - `memory` - Embeddings/AgentDB init threshold (default: 60)
+  - `workers` - Background workers threshold (default: 40)
+- **Templates** - Default templates to use
+  - `hooks` - minimal | standard | full (default: standard)
+  - `intelligence` - basic | standard | full (default: standard)
+- **Auto-init** - Automatically run init commands on [E] EXECUTE (default: true)
+
+**See [docs/INITIALIZATION.md](docs/INITIALIZATION.md) for complete configuration guide.**
+
+---
+
 ## Orchestration Modes
 
 | Mode | Best For | Auto-Features |

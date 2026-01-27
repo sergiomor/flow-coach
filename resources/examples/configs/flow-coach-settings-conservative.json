@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Conservative Flow Coach configuration - resource-constrained environments, minimal overhead",
+  "skills": {
+    "flow-coach": {
+      "thresholds": {
+        "intelligence": 70,
+        "memory": 80,
+        "workers": 60
+      },
+      "templates": {
+        "hooks": "minimal",
+        "intelligence": "basic"
+      },
+      "autoInit": true,
+      "preferences": {
+        "verbosity": "concise",
+        "autoTriggers": false,
+        "showDecisionTrees": false
+      },
+      "notes": {
+        "useCase": "Laptops, limited resources, simple projects",
+        "philosophy": "Only initialize heavy features for truly complex tasks"
+      }
+    }
+  }
+}

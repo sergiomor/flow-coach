@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Enterprise Flow Coach configuration - security-focused, audit trails, compliance",
+  "skills": {
+    "flow-coach": {
+      "thresholds": {
+        "intelligence": 60,
+        "memory": 70,
+        "workers": 50
+      },
+      "templates": {
+        "hooks": "full",
+        "intelligence": "standard"
+      },
+      "autoInit": true,
+      "security": {
+        "alwaysAudit": true,
+        "requireApproval": ["security-manager", "audit"],
+        "byzantineConsensus": true
+      },
+      "preferences": {
+        "verbosity": "detailed",
+        "autoTriggers": true,
+        "showDecisionTrees": true,
+        "logAllDecisions": true
+      },
+      "compliance": {
+        "enableClaimsSystem": true,
+        "humanApprovalGates": ["security", "deployment", "data-changes"],
+        "auditLog": ".claude/audit.log"
+      },
+      "notes": {
+        "useCase": "Enterprise environments, regulated industries, security-critical applications",
+        "philosophy": "Balance capability with security, audit everything, require human oversight for critical decisions"
+      }
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "description": "Aggressive Flow Coach configuration - high-performance systems, maximize AI capabilities",
+  "skills": {
+    "flow-coach": {
+      "thresholds": {
+        "intelligence": 40,
+        "memory": 50,
+        "workers": 30
+      },
+      "templates": {
+        "hooks": "full",
+        "intelligence": "full"
+      },
+      "autoInit": true,
+      "preferences": {
+        "verbosity": "detailed",
+        "autoTriggers": true,
+        "showDecisionTrees": true
+      },
+      "notes": {
+        "useCase": "Workstations, cloud environments, complex projects",
+        "philosophy": "Enable advanced features for most tasks to maximize learning and automation"
+      }
+    }
+  }
+}
