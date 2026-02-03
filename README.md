@@ -29,7 +29,31 @@ Drop the `flow-coach` directory into your `.claude/skills/` directory, then invo
 /flow-coach Fix the login bug and add regression tests
 /flow-coach Set up CI/CD pipeline for our project
 ```
+---
 
+## Task Assessment (11 Dimensions)
+
+When you describe a task, Flow Coach generates:
+
+```
+TASK ASSESSMENT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Complexity:     ████████░░ (80%) Complex
+Duration:       ██████░░░░ (60%) Medium
+Coordination:   █████████░ (90%) High
+Memory Needs:   ████████░░ (80%) Persistent
+Intelligence:   ███████░░░ (70%) Neural
+Security:       ████████░░ (80%) Required (code generation)
+Testing:        ████████░░ (80%) Required (code generation)
+Documentation:  █████░░░░░ (50%) Recommended
+GitHub:         ███░░░░░░░ (30%) Optional
+SPARC:          ████████░░ (80%) Full cycle (new feature)
+ADR:            █████████░ (90%) Required (framework migration)
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Recommendation: HIVE-MIND with MESH topology + SONA intelligence
+SPARC Phases:   Specification → Pseudocode → Architecture → Refinement → Completion
+Auto-enabled:   testgaps, audit, session management, map worker, ADR
+```
 ---
 
 ## How Auto-Triggers Work
@@ -54,6 +78,7 @@ Flow Coach analyzes your task description and **automatically enables features**
 | `prototype`, `quick`, `spike` | SWARM mode + **SPARC (pseudocode→refinement)** |
 | `documentation`, `docs` | **SPARC (completion only)** |
 | `explain`, `understand`, `analyze` | SWARM mode only (no code = no SPARC) |
+| `architecture`, `integrate`, `breaking change`, `why did we`, `tradeoff` | ADR decision guidance |
 
 ### Priority Levels
 
@@ -66,53 +91,28 @@ Flow Coach analyzes your task description and **automatically enables features**
 
 ---
 This is the MINIMAL configuration for pure research tasks.
-```
 
 ---
 
-## Complete Coaching Process (15 Phases)
+## Complete Coaching Process (16 Phases)
 
 ```
-Phase 1:  Task Assessment          → Evaluates 10 dimensions (includes SPARC)
+Phase 1:  Task Assessment          → Evaluates 11 dimensions (includes SPARC + ADR)
 Phase 2:  SPARC Methodology        → Full / Partial / Skip based on task type
-Phase 3:  Mode Selection           → SWARM / HIVE-MIND / DAA
-Phase 4:  Topology Selection       → MESH / HIERARCHICAL / RING / STAR
-Phase 5:  Agent Selection          → ~15 core + custom agents (SPARC agents if needed)
-Phase 6:  Memory Configuration     → AgentDB / ReasoningBank / Hybrid
-Phase 7:  Intelligence Layer       → SONA / MoE / HNSW / Flash Attention
-Phase 8:  Model Routing            → Haiku / Sonnet / Opus auto-selection
-Phase 9:  Background Workers       → 12 available workers
-Phase 10: Security Configuration   → Audit / AIDefence / scanning
-Phase 11: Testing Configuration    → testgaps / tester / TDD
-Phase 12: Documentation Config     → document worker / api-docs
-Phase 13: Integration Config       → GitHub / Diff / Claims / Sessions
-Phase 14: Command Generation       → Complete config for review
-Phase 15: User Decision            → Execute / Modify / Add / Remove
-```
-
----
-
-## Task Assessment (10 Dimensions)
-
-When you describe a task, Flow Coach generates:
-
-```
-TASK ASSESSMENT
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Complexity:     ████████░░ (80%) Complex
-Duration:       ██████░░░░ (60%) Medium
-Coordination:   █████████░ (90%) High
-Memory Needs:   ████████░░ (80%) Persistent
-Intelligence:   ███████░░░ (70%) Neural
-Security:       ████████░░ (80%) Required (code generation)
-Testing:        ████████░░ (80%) Required (code generation)
-Documentation:  █████░░░░░ (50%) Recommended
-GitHub:         ███░░░░░░░ (30%) Optional
-SPARC:          ████████░░ (80%) Full cycle (new feature)
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-Recommendation: HIVE-MIND with MESH topology + SONA intelligence
-SPARC Phases:   Specification → Pseudocode → Architecture → Refinement → Completion
-Auto-enabled:   testgaps, audit, session management, map worker
+Phase 3:  ADR Evaluation           → Required / Recommended / Not needed
+Phase 4:  Mode Selection           → SWARM / HIVE-MIND / DAA
+Phase 5:  Topology Selection       → MESH / HIERARCHICAL / RING / STAR
+Phase 6:  Agent Selection          → ~15 core + custom agents (SPARC agents if needed)
+Phase 7:  Memory Configuration     → AgentDB / ReasoningBank / Hybrid
+Phase 8:  Intelligence Layer       → SONA / MoE / HNSW / Flash Attention
+Phase 9:  Model Routing            → Haiku / Sonnet / Opus auto-selection
+Phase 10: Background Workers       → 12 available workers
+Phase 11: Security Configuration   → Audit / AIDefence / scanning
+Phase 12: Testing Configuration    → testgaps / tester / TDD
+Phase 13: Documentation Config     → document worker / api-docs
+Phase 14: Integration Config       → GitHub / Diff / Claims / Sessions
+Phase 15: Command Generation       → Complete config for review
+Phase 16: User Decision            → Execute / Modify / Add / Remove
 ```
 
 ---
@@ -177,39 +177,9 @@ What type of task is this?
 | **R**efinement | TDD implementation, iterative improvement | Tested code |
 | **C**ompletion | Integration, documentation, deployment prep | Production-ready |
 
-### SPARC Execution Commands
-
-Use swarm/hive-mind with the SPARC phase in the objective:
-
-```bash
-# Specification phase
-npx claude-flow@alpha swarm start -o "SPARC Specification: user authentication" -s development
-
-# Pseudocode phase
-npx claude-flow@alpha swarm start -o "SPARC Pseudocode: user authentication" -s development
-
-# Architecture phase
-npx claude-flow@alpha swarm start -o "SPARC Architecture: user authentication" -s development
-
-# Refinement phase (TDD) - use hive-mind for complex coordination
-npx claude-flow@alpha hive-mind spawn --claude -o "SPARC Refinement (TDD): user authentication"
-
-# Completion phase
-npx claude-flow@alpha swarm start -o "SPARC Completion: user authentication" -s development
-```
-
-### Background Worker Commands
-
-```bash
-npx claude-flow@alpha hooks worker-dispatch --trigger map --context "src/"
-npx claude-flow@alpha hooks worker-dispatch --trigger testgaps --context "src/"
-npx claude-flow@alpha hooks worker-dispatch --trigger audit --priority critical
-npx claude-flow@alpha hooks worker-dispatch --trigger document --context "src/"
-```
-
 ---
 
-## User Decision Menu (16 Options)
+## User Decision Menu (17 Options)
 
 ```
 [E] EXECUTE  - Run these commands now
@@ -228,6 +198,7 @@ npx claude-flow@alpha hooks worker-dispatch --trigger document --context "src/"
 [D] DOCS     - Configure documentation
 [G] GITHUB   - Configure GitHub integration
 [N] SESSION  - Configure session management
+[Z] ADR      - Create/skip Architecture Decision Record
 ```
 
 ---
@@ -265,6 +236,8 @@ npx claude-flow@alpha hooks worker-dispatch --trigger document --context "src/"
 ---
 
 ## Configuration
+
+Flow Coach uses intelligent thresholds to decide when to initialize advanced features based on your task's complexity, memory needs, and coordination requirements.
 
 Flow Coach can be customized per-project by creating `.claude/settings.json`:
 
@@ -416,7 +389,7 @@ Flow Coach can be customized per-project by creating `.claude/settings.json`:
 │ MENU:       [E]xecute [M]odify [A]dd [R]emove [X]plain         │
 │             [S]ave [L]earn [I]ntel [W]orkers [B]rowser         │
 │             [C]laims [P]security [T]esting [D]ocs [G]ithub     │
-│             [N]session                                          │
+│             [N]session [Z]ADR                                   │
 │                                                                 │
 │ COMPOUND AUTO-TRIGGERS (multiple features per task):            │
 │   New feature → Full SPARC + testing + security + docs          │

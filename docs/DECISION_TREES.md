@@ -6,7 +6,7 @@ Quick-reference decision trees for claude-flow v3 orchestration configuration.
 >
 > **MCP Reference**: For all MCP tools, see [MCP_REFERENCE.md](MCP_REFERENCE.md).
 
-**Navigation**: [SPARC Methodology](#sparc-methodology) | [Mode](#mode-selection) | [Topology](#topology-selection) | [Security](#security-configuration) | [Testing](#testing-configuration) | [Documentation](#documentation-configuration) | [Codebase Mapping](#codebase-mapping) | [Session Management](#session-management) | [GitHub](#github-integration) | [Worker Patterns](#worker-patterns-auto-trigger) | [Claims](#claims-system) | [Browser Automation](#browser-automation-configuration)
+**Navigation**: [SPARC Methodology](#sparc-methodology) | [Mode](#mode-selection) | [Topology](#topology-selection) | [ADR](#adr-architecture-decision-records) | [Security](#security-configuration) | [Testing](#testing-configuration) | [Documentation](#documentation-configuration) | [Codebase Mapping](#codebase-mapping) | [Session Management](#session-management) | [GitHub](#github-integration) | [Worker Patterns](#worker-patterns-auto-trigger) | [Claims](#claims-system) | [Browser Automation](#browser-automation-configuration)
 
 ---
 
@@ -90,6 +90,56 @@ How do your agents need to communicate?
 ```
 
 > Detailed topology information: [TOPOLOGIES.md](TOPOLOGIES.md)
+
+---
+
+## ADR (Architecture Decision Records)
+
+```
+Does your task involve...
+|
+|-- New technology / framework / library?
+|   +-- ADR REQUIRED (technology decision)
+|       Keywords: adopt, migrate to, switch to, integrate
+|
+|-- System architecture change?
+|   +-- ADR REQUIRED (architecture decision)
+|       Keywords: restructure, redesign, refactor architecture
+|
+|-- New integration / external service?
+|   +-- ADR REQUIRED (integration decision)
+|       Keywords: integrate with, connect to, API integration
+|
+|-- Database schema change / new storage?
+|   +-- ADR REQUIRED (data decision)
+|       Keywords: new database, schema change, storage pattern
+|
+|-- Security model change?
+|   +-- ADR REQUIRED (security decision)
+|       Keywords: authentication, authorization, security model
+|
+|-- Performance optimization strategy?
+|   +-- ADR RECOMMENDED
+|       Keywords: performance strategy, caching strategy, scaling
+|
+|-- Bug fix / feature implementation?
+|   +-- ADR NOT NEEDED (implementation, not decision)
+|
++-- Documentation / tests only?
+    +-- ADR NOT NEEDED (no architectural impact)
+```
+
+**Trigger keywords**: architecture, decision, adopt, migrate, integrate, technology choice, design pattern, restructure, new system, breaking change, deprecate, replace
+
+**Retroactive ADR phrases** (decision already made but not documented): "why did we", "tradeoff", "alternative approach", "considered options"
+
+**How to create ADRs:**
+```bash
+# Launch Claude Code with ADR objective
+npx claude-flow@alpha hive-mind spawn --claude -o "Create ADR for [your decision]"
+```
+
+> **Note:** The `adr-architect.md` agent definition provides the MADR 3.0 template and ADR context when Claude Code is launched with `--claude`.
 
 ---
 
